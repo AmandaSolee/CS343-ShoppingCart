@@ -38,7 +38,11 @@ function ouptutTableBody() {
         subtotal += total;
     }
     // table footer
-    let tax = subtotal * 0.1;
+    let tax = subtotal * tax_rate;
+    let shipping = 0;
+    if (subtotal > shipping_threshold) {
+        shipping = 40;
+    } 
     const footer = ` 
     <tr class="totals">
             <td colspan="4">Subtotal</td>
@@ -50,11 +54,11 @@ function ouptutTableBody() {
         </tr>
         <tr class="totals">
             <td colspan="4">Shipping</td>
-            <td>$0.00</td>
+            <td>\$${shipping}</td>
         </tr>
         <tr class="totals">
             <td colspan="4" class="focus">Grand Total</td>
-            <td class="focus">\$${subtotal + tax}</td>
+            <td class="focus">\$${subtotal + tax + shipping}</td>
         </tr>`;
     document.write(footer);
     document.write("</table>");
